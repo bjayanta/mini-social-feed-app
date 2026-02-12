@@ -1,3 +1,4 @@
+import { addPost } from "@/data/feeds";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
@@ -23,19 +24,22 @@ const CreateFeed = () => {
   const MAX_CONTENT_LENGTH = 200;
 
   const handlePost = () => {
-    if (!content.trim()) {
+    if (!title.trim() || !content.trim()) {
       Alert.alert("Title and Content cannot be empty");
       return;
     }
 
-    // For now just console log
-    console.log("New Post:", { title, content });
-
-    // Later you’ll push to global state or backend
+    // Add post to data.ts
+    addPost({
+      title,
+      username: "You", // Or get from user auth
+      content,
+    });
 
     setTitle("");
     setContent("");
 
+    // Go back to feed list
     router.back();
   };
 

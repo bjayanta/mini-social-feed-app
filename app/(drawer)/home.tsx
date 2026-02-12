@@ -1,6 +1,6 @@
 import { Post, posts } from "@/data/feeds";
-import { useRouter } from "expo-router";
-import React from "react";
+import { useFocusEffect, useRouter } from "expo-router";
+import React, { useState } from "react";
 import {
   FlatList,
   StyleSheet,
@@ -11,6 +11,8 @@ import {
 
 const Home = () => {
   const router = useRouter();
+
+  const [feedPosts, setFeedPosts] = useState(posts);
 
   const renderItem = ({ item }: { item: Post }) => (
     <TouchableOpacity
@@ -31,10 +33,15 @@ const Home = () => {
     </TouchableOpacity>
   );
 
+  // Refresh feed when coming back from create screen
+  useFocusEffect(() => {
+    setFeedPosts([...posts].sort((a, b) => Number(b.id) - Number(a.id)));
+  });
+
   return (
     <View style={styles.container}>
       <FlatList
-        data={posts}
+        data={feedPosts}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}

@@ -114,3 +114,17 @@ export const posts: Post[] = [
     ],
   },
 ];
+
+// Function to add a new post to the feed
+export function addPost(newPost: Omit<Post, "id" | "createdAt">) {
+  const post: Post = {
+    ...newPost,
+    id: Date.now().toString(),
+    createdAt: "Just now",
+    comments: [],
+  };
+
+  posts.unshift(post);
+
+  return post;
+}
