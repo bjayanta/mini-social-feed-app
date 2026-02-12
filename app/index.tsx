@@ -1,23 +1,17 @@
 import { useRouter } from "expo-router";
-import { Button, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useEffect } from "react";
 
 export default function Index() {
   const router = useRouter();
 
-  return (
-    <SafeAreaView
-      style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-    >
-      <View>
-        <Text>Welcome to the User Input App!</Text>
+  // Redirect to login page on app start
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      router.replace("/(auth)/login");
+    }, 0);
 
-        <Button title="Login" onPress={() => router.push("/(auth)/login")} />
+    return () => clearTimeout(timer);
+  }, [router]);
 
-        <View style={{ height: 10 }} />
-
-        <Button title="Home" onPress={() => router.push("/(drawer)/home")} />
-      </View>
-    </SafeAreaView>
-  );
+  return null; // Return null since we're redirecting immediately
 }
