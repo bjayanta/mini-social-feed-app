@@ -48,3 +48,101 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+## Set System Variables & Path
+
+Java:
+
+If you installed Android Studio, usually it is:
+
+```text
+Variable name: JAVA_HOME
+Variable value: C:\Program Files\Android\Android Studio\jbr
+```
+
+Java Path:
+
+```text
+%JAVA_HOME%\bin
+```
+
+Check version:
+
+```bash
+java -version
+```
+
+Android SDK:
+
+```text
+Variable name: ANDROID_HOME
+Variable value: <Your-android-sdk-path>
+```
+
+Android Path:
+
+```text
+%ANDROID_HOME%\platform-tools
+%ANDROID_HOME%\emulator
+```
+
+## Verify
+
+Open a new terminal (Git Bash or PowerShell) and run:
+
+PowerShell:
+
+```bash
+echo $env:ANDROID_HOME
+```
+
+Git Bash:
+
+```bash
+echo $ANDROID_HOME
+```
+
+Android Debug Bridge:
+
+```bash
+adb --version
+```
+
+## Generate Native Android Folder
+
+```bash
+npx expo prebuild
+```
+
+This will:
+
+- Create an android/ folder
+- Convert your project to a "bare-like" workflow
+
+## Build
+
+Enter the android directory:
+
+```bash
+cd android
+```
+
+For debug APK (Windows):
+
+```bash
+./gradlew.bat assembleDebug
+```
+
+For Release APK (Windows):
+
+```bash
+./gradlew.bat assembleRelease
+```
+
+If anything wrong and need to build again
+
+```bash
+cd android
+./gradlew.bat clean
+./gradlew.bat assembleDebug
+```
